@@ -16,6 +16,13 @@ npm install tooltip-me
 
 ## Usage
 
+In your main.js file
+```
+import TooltipMe from 'tooltip-me'
+app.use(TooltipMe)
+```
+
+In your Vue component
 ```
 <tooltip-me>
   ...
