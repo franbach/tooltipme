@@ -1,12 +1,30 @@
 {
   "name": "tooltipme",
-  "version": "0.1.0",
-  "private": true,
+  "description": "A simple and easy Vue 3 tooltip",
+  "version": "1.0.0",
+  "private": false,
+  "author": {
+    "name": "Francisco Bach",
+    "email": "franciscobach@gmail.com"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-lib": "vue-cli-service build --target lib --name tooltipme ./src/components/index.js",
     "lint": "vue-cli-service lint"
   },
+  "repository": "https://github.com/franbach/tooltipme",
+  "bugs": "https://github.com/franbach/tooltipme/issues",
+  "keywords": [
+    "vue",
+    "vue 3",
+    "tooltip"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist/*"
+  ],
+  "main": "./dist/tooltipme.common.js",
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^3.0.0"
