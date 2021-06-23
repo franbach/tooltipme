@@ -45,6 +45,7 @@ In your Vue component
 * **[offset]** the distance from the trigger object(HTML tag)
 * **[shift]** move the body tooltip relative to the arrow. Up or dow, left or right depending of the tooltip position. Values from 0 to 100. Default is 50(middle). This attribute is optional.
 * **[travel]** the distance that the tooltip travels. Values from 0 to 100. Default is 10. This attribute is optional.
+* #### [Check example!](https://codesandbox.io/s/ylfpv?file=/src/App.vue)
 
 ## License
 
