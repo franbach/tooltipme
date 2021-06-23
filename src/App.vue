@@ -1,7 +1,7 @@
 <template>
   <tooltip-me>
     <img alt="Vue logo" src="./assets/logo.png">
-    <tooltip-me-content name="tooltipme" position="left" color="#c3c3c3" offset="24" class="tooltip-me-test">
+    <tooltip-me-content name="tooltipme" position="bottom" travel="3" color="#c3c3c3" offset="4" class="tooltip-me-test">
       <p>TooltipMe</p>
     </tooltip-me-content>
   </tooltip-me>

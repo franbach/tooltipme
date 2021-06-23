@@ -22,7 +22,7 @@ npm install tooltip-me
   <!-- Any html here that will serve to trigger the tooltip -->
   <i class="las la-exclamation-circle"></i>
   ...
-  <tooltip-me-content name="tooltip-name" position="bottom" color="#c3c3c3" offset="12" class="any css class here that shapes the tooltip body">
+  <tooltip-me-content name="tooltip-name" position="bottom" color="#c3c3c3" offset="12" travel="3" class="any css class here that shapes the tooltip body">
     ...
     <!-- You can put any kind of html code here, including async code. -->
     <p>It is just another div</p>
@@ -37,6 +37,7 @@ npm install tooltip-me
 * **[color]** chose a base color for the tooltip. Accepts HEX and RGBA
 * **[offset]** the distance from the trigger object(HTML tag)
 * **[shift]** move the body tooltip relative to the arrow. Up or dow, left or right depending of the tooltip position. Values from 0 to 100. Default is 50(middle). This attribute is optional.
+* **[travel]** the distance that the tooltip travels. Values from 0 to 100. Default is 10. This attribute is optional.
 
 ## License
 

@@ -16,6 +16,10 @@
         type: String,
         default: '50'
       },
+      travel: {
+        type: String,
+        default: '10'
+      }
     },
     computed: {
       cssProps() {
@@ -38,7 +42,8 @@
             '--arrowL': this.shift !== '-50' ? this.shift + "%" : '-50%',
             '--translateArrow': 'translate(-50%)',
             '--animation_hide': 'top-hide',
-            '--animation_show': 'top-show'
+            '--animation_show': 'top-show',
+            '--travel': this.travel + '%'
           }
         }
         if (this.position == 'right') {
@@ -60,7 +65,8 @@
             '--arrowL': '',
             '--translateArrow': 'translate(0, -50%)',
             '--animation_hide': 'right-hide',
-            '--animation_show': 'right-show'
+            '--animation_show': 'right-show',
+            '--travel': this.travel + '%'
           }
         }
         if (this.position == 'bottom') {
@@ -82,7 +88,8 @@
             '--arrowL': this.shift !== '-50' ? this.shift + "%" : '-50%',
             '--translateArrow': 'translate(-50%)',
             '--animation_hide': 'bottom-hide',
-            '--animation_show': 'bottom-show'
+            '--animation_show': 'bottom-show',
+            '--travel': this.travel + '%'
           }
         }
         if (this.position == 'left') {
@@ -104,7 +111,8 @@
             '--arrowL': '100%',
             '--translateArrow': 'translate(0, -50%)',
             '--animation_hide': 'left-hide',
-            '--animation_show': 'left-show'
+            '--animation_show': 'left-show',
+            '--travel': this.travel + '%'
           }
         }
         return true;
@@ -170,7 +178,7 @@
     50.1% {
       visibility: hidden;
       opacity: 0;
-      bottom: calc(var(--bottom) - 25%);
+      bottom: calc(var(--bottom) - var(--travel));
     }
     100% { 
       visibility: visible;
@@ -191,7 +199,7 @@
     100% { 
       visibility: hidden;
       opacity: 0;
-      bottom: calc(var(--bottom) - 25%);
+      bottom: calc(var(--bottom) - var(--travel));
     }
   }
 
@@ -203,7 +211,7 @@
     50.1% { 
       visibility: hidden;
       opacity: 0;
-      top: calc(var(--top) - 25%);
+      top: calc(var(--top) - var(--travel));
     }
     100% { 
       visibility: visible;
@@ -224,7 +232,7 @@
     100% { 
       visibility: hidden;
       opacity: 0;
-      top: calc(var(--top) - 25%);
+      top: calc(var(--top) - var(--travel));
     }
   }
 
@@ -236,7 +244,7 @@
     50.1% { 
       visibility: hidden;
       opacity: 0;
-      right: calc(var(--right) - 25%);
+      right: calc(var(--right) - var(--travel));
     }
     100% { 
       visibility: visible;
@@ -257,7 +265,7 @@
     100% { 
       visibility: hidden;
       opacity: 0;
-      right: calc(var(--right) - 25%);
+      right: calc(var(--right) - var(--travel));
     }
   }
 
@@ -269,7 +277,7 @@
     50.1% { 
       visibility: hidden;
       opacity: 0;
-      left: calc(var(--left) - 25%);
+      left: calc(var(--left) - var(--travel));
     }
     100% { 
       visibility: visible;
@@ -290,7 +298,7 @@
     100% { 
       visibility: hidden;
       opacity: 0;
-      left: calc(var(--left) - 25%);
+      left: calc(var(--left) - var(--travel));
     }
   }
 </style>
