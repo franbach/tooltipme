@@ -1,5 +1,5 @@
 # TooltipMe
-## _A simlple and easy to use tooltip for Vue 3_
+## _A simple and easy to use tooltip for Vue 3_
 #### Made 100% with Vue!
 
 - Made entirely with Vue 3
