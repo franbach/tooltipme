@@ -1,4 +1,10 @@
 # TooltipMe
+
+[![Vue 3.x](https://img.shields.io/badge/Vue-3.x-blueviolet.svg)](https://v3.vuejs.org/guide/introduction.html)
+[![npm](https://img.shields.io/npm/v/tooltip-me)](https://www.npmjs.com/package/tooltip-me)
+[![npm](https://img.shields.io/npm/dm/tooltip-me)](https://www.npmjs.com/package/tooltip-me)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/franbach/tooltipme/blob/master/LICENSE.md)
+
 ## _A simple and easy to use tooltip for Vue 3_
 #### Made 100% with Vue!
 
