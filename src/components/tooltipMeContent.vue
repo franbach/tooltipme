@@ -1,5 +1,9 @@
 <template>
-  <div :tooltip="`tooltip-me_${name}`" :style="cssProps" class="tooltip-me tooltip-me-position tooltip-me-off">
+  <div :tooltipme="`tooltip-me_${this.settings.name}`" @mouseenter="pauseMe()" @mouseleave="hideMe()" 
+    :style="cssProps" 
+    :hover="this.settings.hover" 
+    :delay="this.settings.delay" 
+    class="tooltip-me tooltip-me-position tooltip-me-off">
     <slot></slot>
   </div>
 </template>
@@ -8,111 +12,132 @@
   export default {
     name: 'tooltipMeContent',
     props: {
-      name: String,
-      color: String,
-      position: String,
-      offset: String,
-      shift: {
-        type: String,
-        default: '50'
+      options: Object
+    },
+    data() {
+      return {
+        pause: false,
+        settings: {
+          name: 'default',
+          color: '#ccc',
+          position: 'bottom',
+          move: '50',
+          offset: '12',
+          shift: '50',
+          travel: '10',
+          delay: '300',
+          hover: false,
+          arrow: true
+        }
+      }
+    },
+    methods: {
+      pauseMe() {
+        this.emitter.emit("tooltipme-paused", 'paused');
       },
-      travel: {
-        type: String,
-        default: '10'
+      hideMe() {
+        this.emitter.emit("tooltipme-paused", 'close');
       }
     },
     computed: {
       cssProps() {
-        if (this.position == 'top') {
+        // Ensures that user options are merged with the defaults
+        // settings in case of the user not assinging all of them.
+        Object.assign(this.settings, this.options);
+        if (this.settings.position == 'top') {
           return {
             '--top': '',
             '--right': '',
-            '--left': '50%',
+            '--left': this.settings.move + '%',
             '--bottom': '100%',
-            '--offset': `0px 0px ${this.offset + "px"} 0px`,
-            '--translate': `translate(-${this.shift}%)`,
-            '--baseColor': this.color,
-            '--colorT': this.color,
+            '--offset': `0px 0px ${this.settings.offset + "px"} 0px`,
+            '--translate': `translate(-${this.settings.shift}%)`,
+            '--baseColor': this.settings.color,
+            '--colorT': this.settings.arrow ? this.settings.color : 'transparent',
             '--colorR': 'transparent',
             '--colorB': 'transparent',
             '--colorL': 'transparent',
             '--arrowT': '100%',
             '--arrowR': '',
             '--arrowB': '',
-            '--arrowL': this.shift !== '-50' ? this.shift + "%" : '-50%',
+            '--arrowL': this.settings.shift + '%',
             '--translateArrow': 'translate(-50%)',
             '--animation_hide': 'top-hide',
             '--animation_show': 'top-show',
-            '--travel': this.travel + '%'
+            '--travel': this.settings.travel + '%',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
-        if (this.position == 'right') {
+        if (this.settings.position == 'right') {
           return {
-            '--top': '50%',
+            '--top': this.settings.move + '%',
             '--right': '',
             '--left': '100%',
             '--bottom': '',
-            '--offset': `0px 0px 0px ${this.offset + "px"}`,
-            '--translate': `translate(0, -${this.shift}%)`,
-            '--baseColor': this.color,
+            '--offset': `0px 0px 0px ${this.settings.offset + "px"}`,
+            '--translate': `translate(0, -${this.settings.shift}%)`,
+            '--baseColor': this.settings.color,
             '--colorT': 'transparent',
-            '--colorR': this.color,
+            '--colorR': this.settings.arrow ? this.settings.color : 'transparent',
             '--colorB': 'transparent',
             '--colorL': 'transparent',
-            '--arrowT': this.shift !== '-50' ? this.shift + "%" : '-50%',
+            '--arrowT': this.settings.shift + '%',
             '--arrowR': '100%',
             '--arrowB': '',
             '--arrowL': '',
             '--translateArrow': 'translate(0, -50%)',
             '--animation_hide': 'right-hide',
             '--animation_show': 'right-show',
-            '--travel': this.travel + '%'
+            '--travel': this.settings.travel + '%',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
-        if (this.position == 'bottom') {
+        if (this.settings.position == 'bottom') {
           return {
             '--top': '100%',
             '--right': '',
-            '--left': '50%',
+            '--left': this.settings.move + '%',
             '--bottom': '',
-            '--offset': `${this.offset + "px"} 0px 0px 0px`,
-            '--translate': `translate(-${this.shift}%)`,
-            '--baseColor': this.color,
+            '--offset': `${this.settings.offset + "px"} 0px 0px 0px`,
+            '--translate': `translate(-${this.settings.shift}%)`,
+            '--baseColor': this.settings.color,
             '--colorT': 'transparent',
             '--colorR': 'transparent',
-            '--colorB': this.color,
+            '--colorB': this.settings.arrow ? this.settings.color : 'transparent',
             '--colorL': 'transparent',
             '--arrowT': '',
             '--arrowR': '',
             '--arrowB': '100%',
-            '--arrowL': this.shift !== '-50' ? this.shift + "%" : '-50%',
+            '--arrowL': this.settings.shift + '%',
             '--translateArrow': 'translate(-50%)',
             '--animation_hide': 'bottom-hide',
             '--animation_show': 'bottom-show',
-            '--travel': this.travel + '%'
+            '--travel': this.settings.travel + '%',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
-        if (this.position == 'left') {
+        if (this.settings.position == 'left') {
           return {
-            '--top': '50%',
+            '--top': this.settings.move + '%',
             '--right': '100%',
             '--left': '',
             '--bottom': '',
-            '--offset': `0px ${this.offset + "px"} 0px 0px`,
-            '--translate': `translate(0, -${this.shift}%)`,
-            '--baseColor': this.color,
+            '--offset': `0px ${this.settings.offset + "px"} 0px 0px`,
+            '--translate': `translate(0, -${this.settings.shift}%)`,
+            '--baseColor': this.settings.color,
             '--colorT': 'transparent',
             '--colorR': 'transparent',
             '--colorB': 'transparent',
-            '--colorL': this.color,
-            '--arrowT': this.shift !== '-50' ? this.shift + "%" : '-50%',
+            '--colorL': this.settings.arrow ? this.settings.color : 'transparent',
+            '--arrowT': this.settings.shift + '%',
             '--arrowR': '',
             '--arrowB': '',
             '--arrowL': '100%',
             '--translateArrow': 'translate(0, -50%)',
             '--animation_hide': 'left-hide',
             '--animation_show': 'left-show',
-            '--travel': this.travel + '%'
+            '--travel': this.settings.travel + '%',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
         return true;
@@ -125,9 +150,9 @@
   /* Base */
   .tooltip-me {
     position: absolute;
-    pointer-events: none;
     z-index: 999;
     background-color: var(--baseColor);
+    pointer-events: var(--hover);
   }
 
   /* Arrow */
@@ -164,6 +189,7 @@
   .tooltip-me-hide {
     animation: var(--animation_hide);
     animation-duration: 700ms;
+    pointer-events: none;
   }
   .tooltip-me-show {
     animation: var(--animation_show);
@@ -172,26 +198,22 @@
 
   /* Animation for Top */
   @keyframes top-show {
-    /* delay */
-    0%  { visibility: hidden; opacity: 0; }
-    50% { visibility: hidden; opacity: 0; }
-    50.1% {
+    0% {
       visibility: hidden;
       opacity: 0;
       bottom: calc(var(--bottom) - var(--travel));
+      pointer-events: none;
     }
     100% { 
       visibility: visible;
       opacity: 1;
-      bottom: var(--bottom)
+      bottom: var(--bottom);
+      pointer-events: var(--hover);
     }
   }
 
   @keyframes top-hide {
-    /* delay */
-    0%  { visibility: visible; opacity: 1; }
-    50% { visibility: visible; opacity: 1; }
-    50.1% { 
+    0% { 
       visibility: visible;
       opacity: 1;
       bottom: var(--bottom);
@@ -205,26 +227,22 @@
 
   /* Animation for Bottom */
   @keyframes bottom-show {
-    /* delay */
-    0%  { visibility: hidden; opacity: 0; }
-    50% { visibility: hidden; opacity: 0; }
-    50.1% { 
+    0% { 
       visibility: hidden;
       opacity: 0;
       top: calc(var(--top) - var(--travel));
+      pointer-events: none;
     }
     100% { 
       visibility: visible;
       opacity: 1;
-      top: var(--top)
+      top: var(--top);
+      pointer-events: var(--hover);
     }
   }
 
   @keyframes bottom-hide {
-    /* delay */
-    0%  { visibility: visible; opacity: 1; }
-    50% { visibility: visible; opacity: 1; }
-    50.1% { 
+    0% { 
       visibility: visible;
       opacity: 1;
       top: var(--top);
@@ -238,26 +256,22 @@
 
   /* Animation for Left */
   @keyframes left-show {
-    /* delay */
-    0%  { visibility: hidden; opacity: 0; }
-    50% { visibility: hidden; opacity: 0; }
-    50.1% { 
+    0% { 
       visibility: hidden;
       opacity: 0;
       right: calc(var(--right) - var(--travel));
+      pointer-events: none;
     }
     100% { 
       visibility: visible;
       opacity: 1;
-      right: var(--right)
+      right: var(--right);
+      pointer-events: var(--hover);
     }
   }
 
   @keyframes left-hide {
-    /* delay */
-    0%  { visibility: visible; opacity: 1; }
-    50% { visibility: visible; opacity: 1; }
-    50.1% { 
+    0% { 
       visibility: visible;
       opacity: 1;
       right: var(--right);
@@ -271,26 +285,22 @@
 
   /* Animation for Right */
   @keyframes right-show {
-    /* delay */
-    0%  { visibility: hidden; opacity: 0; }
-    50% { visibility: hidden; opacity: 0; }
-    50.1% { 
+    0% { 
       visibility: hidden;
       opacity: 0;
       left: calc(var(--left) - var(--travel));
+      pointer-events: none;
     }
     100% { 
       visibility: visible;
       opacity: 1;
-      left: var(--left)
+      left: var(--left);
+      pointer-events: var(--hover);
     }
   }
 
   @keyframes right-hide {
-    /* delay */
-    0%  { visibility: visible; opacity: 1; }
-    50% { visibility: visible; opacity: 1; }
-    50.1% { 
+    0% { 
       visibility: visible;
       opacity: 1;
       left: var(--left);
