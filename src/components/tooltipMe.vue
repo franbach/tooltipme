@@ -23,7 +23,7 @@
     },
     mounted() {
       // Waits for child's elements to be loaded
-      // and then grab the html element
+      // and then grabs the html element
       this.$nextTick(function() {
         this.tooltip.element = this.$el.querySelector('[tooltipme]');
         this.tooltip.hover = this.tooltip.element.getAttribute('hover');
@@ -33,13 +33,16 @@
       // Receives the event from the tooltip-me-content with the
       // message if its paused or not meaning that the user
       // might be interactig with the tooltip 
-      this.emitter.on("tooltipme-paused", (e) => {
-        this.closeMe(e)
+      this.emitter.on("tooltipme-interaction", (event) => {
+        this.closeMe(event);
       })
     },
     methods: {
       showMe() {
-        setTimeout(() => { this.show() }, this.tooltip.delay)
+        setTimeout(() => { 
+          this.resetTimers();
+          this.show();
+        }, this.tooltip.delay);
       },
       
       closeMe(e) {
@@ -47,8 +50,7 @@
           // If the event message comes with the value 'paused' then
           // we clear any setTimeout to prevent closing if there's any
           // timing function in place
-          clearTimeout(this.timeOutDelayProp);
-          clearTimeout(this.timeOutWaitUser);
+          this.resetTimers();
         } else if (e == 'close') {
           // If the event message is 'close' means that the user was 
           // interacting with the tooltip but had leaved. 
@@ -76,19 +78,24 @@
       _timeOutWaitUser() {
         this.timeOutWaitUser = setTimeout(() => { 
           this.hide()
-        }, 2000 )
+        }, 2000 );
+      },
+
+      resetTimers() {
+        clearTimeout(this.timeOutDelayProp);
+        clearTimeout(this.timeOutWaitUser);
       },
 
       show() {
-        this.tooltip.element.classList.remove("tooltip-me-off")
-        this.tooltip.element.classList.remove("tooltip-me-hide")
-        this.tooltip.element.classList.add("tooltip-me-show")
+        this.tooltip.element.classList.remove("tooltip-me-off");
+        this.tooltip.element.classList.remove("tooltip-me-hide");
+        this.tooltip.element.classList.add("tooltip-me-show");
       },
 
       hide() {
-        this.tooltip.element.classList.remove("tooltip-me-show")
-        this.tooltip.element.classList.add("tooltip-me-hide")
-        this.tooltip.element.classList.add("tooltip-me-off")
+        this.tooltip.element.classList.remove("tooltip-me-show");
+        this.tooltip.element.classList.add("tooltip-me-hide");
+        this.tooltip.element.classList.add("tooltip-me-off");
       }
 
     }

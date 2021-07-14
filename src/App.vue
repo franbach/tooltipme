@@ -19,6 +19,7 @@ export default {
         offset: '50',
         travel: '3',
         delay: '500',
+        speed: '300',
         hover: true,
         arrow: true
       }

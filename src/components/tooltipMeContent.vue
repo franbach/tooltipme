@@ -16,7 +16,6 @@
     },
     data() {
       return {
-        pause: false,
         settings: {
           name: 'default',
           color: '#ccc',
@@ -26,6 +25,7 @@
           shift: '50',
           travel: '10',
           delay: '300',
+          speed: '700',
           hover: false,
           arrow: true
         }
@@ -33,10 +33,10 @@
     },
     methods: {
       pauseMe() {
-        this.emitter.emit("tooltipme-paused", 'paused');
+        this.emitter.emit("tooltipme-interaction", 'paused');
       },
       hideMe() {
-        this.emitter.emit("tooltipme-paused", 'close');
+        this.emitter.emit("tooltipme-interaction", 'close');
       }
     },
     computed: {
@@ -65,7 +65,8 @@
             '--animation_hide': 'top-hide',
             '--animation_show': 'top-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none'
+            '--hover': this.settings.hover ? 'auto' : 'none',
+            '--speed': this.settings.speed + 'ms'
           }
         }
         if (this.settings.position == 'right') {
@@ -89,7 +90,8 @@
             '--animation_hide': 'right-hide',
             '--animation_show': 'right-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none'
+            '--hover': this.settings.hover ? 'auto' : 'none',
+            '--speed': this.settings.speed + 'ms'
           }
         }
         if (this.settings.position == 'bottom') {
@@ -113,7 +115,8 @@
             '--animation_hide': 'bottom-hide',
             '--animation_show': 'bottom-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none'
+            '--hover': this.settings.hover ? 'auto' : 'none',
+            '--speed': this.settings.speed + 'ms'
           }
         }
         if (this.settings.position == 'left') {
@@ -137,7 +140,8 @@
             '--animation_hide': 'left-hide',
             '--animation_show': 'left-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none'
+            '--hover': this.settings.hover ? 'auto' : 'none',
+            '--speed': this.settings.speed + 'ms'
           }
         }
         return true;
@@ -188,12 +192,12 @@
   }
   .tooltip-me-hide {
     animation: var(--animation_hide);
-    animation-duration: 700ms;
+    animation-duration: var(--speed);
     pointer-events: none;
   }
   .tooltip-me-show {
     animation: var(--animation_show);
-    animation-duration: 700ms;
+    animation-duration: var(--speed);
   }
 
   /* Animation for Top */
