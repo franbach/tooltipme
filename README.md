@@ -14,7 +14,7 @@
 
 ## Installation
 
-Make sure you are working with Vue3 [VueJS 3](https://v3.vuejs.org/)
+Make sure you are working with [VueJS 3](https://v3.vuejs.org/)
 
 ```sh
 npm install tooltip-me
@@ -23,36 +23,123 @@ npm install tooltip-me
 ## Usage
 
 In your main.js file
-```
+```js
 import TooltipMe from 'tooltip-me'
 app.use(TooltipMe)
 ```
 
-In your Vue component
-```
-<tooltip-me>
-  ...
-  <!-- Any html here that will serve to trigger the tooltip -->
-  <i class="las la-exclamation-circle"></i>
-  ...
-  <tooltip-me-content name="tooltip-name" position="bottom" color="#c3c3c3" offset="12" travel="3" class="any css class here that shapes the tooltip body">
-    ...
-    <!-- You can put any kind of html code here, including async code. -->
-    <p>It is just another div</p>
-    ...
-  </tooltip-me-content>
-<tooltip-me>
+So then you can use like this...
+```vue
+<template>
+  <!-- 
+    use '<tooltip-me>' to wrap the html element you want to be
+    the tooltip trigger
+  -->
+  <tooltip-me>
+    <!-- element that will trigger the tooltip -->
+    <img alt="Vue logo" src="./assets/logo.png">
+
+    <!-- 
+      This is the tooltip itself. It wont be visible as long 
+      the user don't hover over the triggering element.
+      In this example we are returning a data object 'myOptions' 
+      as our tooltip options. 
+    -->
+    <tooltip-me-content :options="myOptions" class="tooltip-me-test">
+      <p>TooltipMe</p>
+    </tooltip-me-content>
+  </tooltip-me>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  components: {},
+  data() {
+    return {
+      myOptions: {
+        color: '#44b785',
+        position: 'bottom',
+        offset: '50',
+        travel: '3',
+        delay: '500',
+        speed: '300',
+        hover: true,
+        arrow: true
+      }
+    }
+  }
+}
+</script>
+
+<style>
+.tooltip-me-test {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #33465a;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: #2c3e50;
+}
+</style>
 ```
 
-### Configuration
-* **[name]** put any name you want for the tooltip
-* **[position]** there are four. (top, bottom, right, left)
-* **[color]** chose a base color for the tooltip. Accepts HEX and RGBA
-* **[offset]** the distance from the trigger object(HTML tag)
-* **[shift]** move the body tooltip relative to the arrow. Up or dow, left or right depending of the tooltip position. Values from 0 to 100. Default is 50(middle). This attribute is optional.
-* **[travel]** the distance that the tooltip travels. Values from 0 to 100. Default is 10. This attribute is optional.
+# Options available
+
+#### `name {String}`
+name your tooltip
+**Default**: `'default'`
+
+#### `color {String}`
+Hex or Rgba string
+**Default**: `'#ccc'`
+
+#### `position {String}`
+4 position available: top, right, bottom, left
+**Default**: `'top'`
+
+#### `offset {String or Integer}`
+the distance from the html element
+**Default**: `12`
+
+#### `shift {String or Integer}`
+move the body tooltip relative to the arrow. Up or dow, left or right
+**Default**: `50`
+
+#### `travel {String or Integer}`
+the distance that the tooltip travels
+**Default**: `3`
+
+#### `delay {String or Integer}`
+its the amount of time the tooltip waits to show and hide in ms.
+**Default**: `300`
+
+#### `speed {String or Integer}`
+speed in which the tooltip appears after the delay
+**Default**: `700`
+
+#### `hover {Boolean}`
+it prevents the tooltip from closing if the user is hovering it
+**Default**: `false`
+
+#### `arrow {Boolean}`
+make the tooltip arrow visible or not
+**Default**: `true`
+
 * #### [Check example!](https://codesandbox.io/s/ylfpv?file=/src/App.vue)
 
 ## License
 
-[MIT](./LICENSE) © franbach
+[MIT](./LICENSE.md) © franbach

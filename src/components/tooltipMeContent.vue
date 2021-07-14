@@ -19,7 +19,7 @@
         settings: {
           name: 'default',
           color: '#ccc',
-          position: 'bottom',
+          position: 'top',
           move: '50',
           offset: '12',
           shift: '50',

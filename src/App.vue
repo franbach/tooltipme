@@ -16,10 +16,10 @@ export default {
       myOptions: {
         color: '#44b785',
         position: 'bottom',
-        offset: '50',
-        travel: '3',
-        delay: '500',
-        speed: '300',
+        offset: 50,
+        travel: 3,
+        delay: 500,
+        speed: 300,
         hover: true,
         arrow: true
       }
