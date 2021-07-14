@@ -41,7 +41,7 @@ So then you can use like this...
 
     <!-- 
       This is the tooltip itself. It wont be visible as long 
-      the user don't hover over the triggering element.
+      the user don't hover the triggering element.
       In this example we are returning a data object 'myOptions' 
       as our tooltip options. 
     -->
@@ -60,10 +60,10 @@ export default {
       myOptions: {
         color: '#44b785',
         position: 'bottom',
-        offset: '50',
-        travel: '3',
-        delay: '500',
-        speed: '300',
+        offset: 24,
+        travel: 3,
+        delay: 500,
+        speed: 300,
         hover: true,
         arrow: true
       }
@@ -100,42 +100,52 @@ export default {
 
 #### `name {String}`
 name your tooltip
+
 **Default**: `'default'`
 
 #### `color {String}`
-Hex or Rgba string
+tooltip color. Hex or Rgba string
+
 **Default**: `'#ccc'`
 
 #### `position {String}`
-4 position available: top, right, bottom, left
+4 positions available: top, right, bottom, left
+
 **Default**: `'top'`
 
 #### `offset {String or Integer}`
 the distance from the html element
+
 **Default**: `12`
 
 #### `shift {String or Integer}`
 move the body tooltip relative to the arrow. Up or dow, left or right
+
 **Default**: `50`
 
 #### `travel {String or Integer}`
 the distance that the tooltip travels
+
 **Default**: `3`
 
 #### `delay {String or Integer}`
 its the amount of time the tooltip waits to show and hide in ms.
+
 **Default**: `300`
 
 #### `speed {String or Integer}`
 speed in which the tooltip appears after the delay
+
 **Default**: `700`
 
 #### `hover {Boolean}`
 it prevents the tooltip from closing if the user is hovering it
+
 **Default**: `false`
 
 #### `arrow {Boolean}`
 make the tooltip arrow visible or not
+
 **Default**: `true`
 
 * #### [Check example!](https://codesandbox.io/s/ylfpv?file=/src/App.vue)
