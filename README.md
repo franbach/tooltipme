@@ -123,6 +123,11 @@ move the body tooltip relative to the arrow. Up or dow, left or right
 
 **Default**: `50`
 
+#### `move {String or Integer}`
+move the whole tooltip including arrow relative to the trigger element. Up or dow, left or right
+
+**Default**: `50`
+
 #### `travel {String or Integer}`
 the distance that the tooltip travels
 
