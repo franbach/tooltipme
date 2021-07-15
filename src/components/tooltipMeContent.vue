@@ -33,10 +33,10 @@
     },
     methods: {
       pauseMe() {
-        this.emitter.emit("tooltipme-interaction", 'paused');
+        this.tipmitter.emit("tooltipme-interaction", 'paused');
       },
       hideMe() {
-        this.emitter.emit("tooltipme-interaction", 'close');
+        this.tipmitter.emit("tooltipme-interaction", 'close');
       }
     },
     computed: {

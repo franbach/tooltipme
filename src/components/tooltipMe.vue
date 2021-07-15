@@ -33,7 +33,7 @@
       // Receives the event from the tooltip-me-content with the
       // message if its paused or not meaning that the user
       // might be interactig with the tooltip 
-      this.emitter.on("tooltipme-interaction", (event) => {
+      this.tipmitter.on("tooltipme-interaction", (event) => {
         this.closeMe(event);
       })
     },
