@@ -1,8 +1,8 @@
 <template>
-  <div :tooltipme="`tooltip-me_${this.settings.name}`" @mouseenter="pauseMe()" @mouseleave="hideMe()" 
-    :style="cssProps" 
-    :hover="this.settings.hover" 
-    :delay="this.settings.delay" 
+  <div :tooltipme="`tooltip-me_${this.settings.name}`"
+    :style="cssProps"
+    :hover="this.settings.hover"
+    :delay="this.settings.delay"
     class="tooltip-me tooltip-me-position tooltip-me-off">
     <slot></slot>
   </div>
@@ -31,14 +31,6 @@
         }
       }
     },
-    methods: {
-      pauseMe() {
-        this.tipmitter.emit("tooltipme-interaction", 'paused');
-      },
-      hideMe() {
-        this.tipmitter.emit("tooltipme-interaction", 'close');
-      }
-    },
     computed: {
       cssProps() {
         // Ensures that user options are merged with the defaults
@@ -50,7 +42,7 @@
             '--right': '',
             '--left': this.settings.move + '%',
             '--bottom': '100%',
-            '--offset': `0px 0px ${this.settings.offset + "px"} 0px`,
+            '--offset': this.settings.hover ? '0px 0px 0px 0px' : `0px 0px ${this.settings.offset + "px"} 0px`,
             '--translate': `translate(-${this.settings.shift}%)`,
             '--baseColor': this.settings.color,
             '--colorT': this.settings.arrow ? this.settings.color : 'transparent',
@@ -65,8 +57,8 @@
             '--animation_hide': 'top-hide',
             '--animation_show': 'top-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none',
-            '--speed': this.settings.speed + 'ms'
+            '--speed': this.settings.speed + 'ms',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
         if (this.settings.position == 'right') {
@@ -75,7 +67,7 @@
             '--right': '',
             '--left': '100%',
             '--bottom': '',
-            '--offset': `0px 0px 0px ${this.settings.offset + "px"}`,
+            '--offset': this.settings.hover ? '0px 0px 0px 0px' : `0px 0px 0px ${this.settings.offset + "px"}`,
             '--translate': `translate(0, -${this.settings.shift}%)`,
             '--baseColor': this.settings.color,
             '--colorT': 'transparent',
@@ -90,8 +82,8 @@
             '--animation_hide': 'right-hide',
             '--animation_show': 'right-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none',
-            '--speed': this.settings.speed + 'ms'
+            '--speed': this.settings.speed + 'ms',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
         if (this.settings.position == 'bottom') {
@@ -100,7 +92,7 @@
             '--right': '',
             '--left': this.settings.move + '%',
             '--bottom': '',
-            '--offset': `${this.settings.offset + "px"} 0px 0px 0px`,
+            '--offset': this.settings.hover ? '0px 0px 0px 0px' : `${this.settings.offset + "px"} 0px 0px 0px`,
             '--translate': `translate(-${this.settings.shift}%)`,
             '--baseColor': this.settings.color,
             '--colorT': 'transparent',
@@ -115,8 +107,8 @@
             '--animation_hide': 'bottom-hide',
             '--animation_show': 'bottom-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none',
-            '--speed': this.settings.speed + 'ms'
+            '--speed': this.settings.speed + 'ms',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
         if (this.settings.position == 'left') {
@@ -125,7 +117,7 @@
             '--right': '100%',
             '--left': '',
             '--bottom': '',
-            '--offset': `0px ${this.settings.offset + "px"} 0px 0px`,
+            '--offset': this.settings.hover ? '0px 0px 0px 0px' : `0px ${this.settings.offset + "px"} 0px 0px`,
             '--translate': `translate(0, -${this.settings.shift}%)`,
             '--baseColor': this.settings.color,
             '--colorT': 'transparent',
@@ -140,8 +132,8 @@
             '--animation_hide': 'left-hide',
             '--animation_show': 'left-show',
             '--travel': this.settings.travel + '%',
-            '--hover': this.settings.hover ? 'auto' : 'none',
-            '--speed': this.settings.speed + 'ms'
+            '--speed': this.settings.speed + 'ms',
+            '--hover': this.settings.hover ? 'auto' : 'none'
           }
         }
         return true;
@@ -198,6 +190,7 @@
   .tooltip-me-show {
     animation: var(--animation_show);
     animation-duration: var(--speed);
+    pointer-events: var(--hover);
   }
 
   /* Animation for Top */
